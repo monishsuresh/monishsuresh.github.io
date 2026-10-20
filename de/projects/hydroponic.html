@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ESP32-Steuerung für eine Hydroponik-Farm – Monish Suresh</title>
+  <meta name="description" content="Ein ESP32-basiertes IoT-System, das die Wasserqualität einer Hydroponik-Farm automatisch prüft, entwickelt im Praktikum im FabLab Kamp-Lintfort: Sensorik, Pumpen- und Ventilsteuerung, ThingsBoard-Dashboard, Platinen- und Konstruktionsarbeit.">
+  <meta name="color-scheme" content="light">
+  <link rel="alternate" hreflang="en" href="../../projects/hydroponic.html">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">Monish Suresh</a>
+    <nav class="nav">
+      <a href="../index.html#projekte">Projekte</a>
+      <a href="../index.html#kontakt">Kontakt</a>
+      <a class="lang" href="../../projects/hydroponic.html" hreflang="en" lang="en" title="English version">EN</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="project-hero teal">
+    <div class="wrap">
+      <a class="back" href="../index.html#projekte">← Zurück zu allen Projekten</a>
+      <h1>ESP32-Steuerung für eine Hydroponik-Farm</h1>
+      <p class="lead">Ein IoT-System, das die Wasserqualität einer Hydroponik-Farm automatisch prüft und erhält, entwickelt während meines Praktikums im FabLab Kamp-Lintfort. Ich habe an Sensorik, Firmware, Dashboard, Elektronik und Konstruktion gearbeitet.</p>
+      <ul class="tags"><li>ESP32</li><li>Arduino</li><li>ThingsBoard</li><li>KiCad</li><li>Fusion 360</li><li>3D-Druck</li></ul>
+    </div>
+  </section>
+
+  <div class="project-body">
+    <div class="wrap">
+      <article>
+        <h2>Überblick</h2>
+        <p>In einer Hydroponik-Farm stehen die Pflanzenwurzeln ständig im Wasser, daher müssen elektrische Leitfähigkeit (EC) und pH-Wert laufend überwacht werden. Ziel war ein System, das diese Prüfungen automatisch durchführt, die Pflanzenbeleuchtung steuert und sich über ein Web-Dashboard überwachen und auslösen lässt.</p>
+
+        <figure class="figure">
+          <img src="../../assets/img/hydro-structure.jpg" alt="Hydroponik-System im Aufbau: Kunststoffboxen, über Schläuche mit Pumpen und Ventilen verbunden" loading="lazy">
+          <figcaption>Das System im Aufbau: Haupttank, Sensorboxen sowie Boxen für destilliertes Wasser und KCl, verbunden über Pumpen und Ventile.</figcaption>
+        </figure>
+
+        <h2>Ablauf der Wasserprüfung</h2>
+        <p>Der pH-Sensor muss in Kaliumchlorid-Lösung (KCl) gelagert werden, der EC-Sensor dagegen trocken bleiben, daher erhielt jeder Sensor eine eigene Box. Ein Prüfzyklus umfasst die folgenden Schritte:</p>
+        <ol>
+          <li>Tankwasser wird in die pH-Sensorbox gepumpt und dort einige Minuten für die Messung gehalten.</li>
+          <li>Anschließend fließt es in die EC-Sensorbox zur EC-Messung und wird danach in den Haupttank zurückgepumpt.</li>
+          <li>Beide Boxen werden mit destilliertem Wasser gespült.</li>
+          <li>KCl-Lösung wird zur Lagerung des Sensors in die pH-Box gepumpt und vor der nächsten Prüfung wieder abgelassen und ausgespült.</li>
+        </ol>
+
+        <h2>Sensorik &amp; Kalibrierung</h2>
+        <ul>
+          <li>EC-Sensor mit Temperaturkompensation über Referenzlösungen mit 12,88&nbsp;mS/cm und 1413&nbsp;µS/cm kalibriert, den pH-Sensor mit Pufferlösungen pH&nbsp;4 und pH&nbsp;9.</li>
+          <li><strong>Dreitägiger Stabilitätstest</strong> mit stündlichen Messungen, getaktet durch eine DS3231-RTC; beide Sensoren lieferten stabile Werte.</li>
+          <li>EC- und pH-Sensor über einen <strong>externen ADC</strong> angebunden, der genauer war als der interne ADC des ESP32.</li>
+          <li>Als der ursprüngliche pH-Sensor ungenau wurde, habe ich auf einen neuen umgestellt und eigenen Kalibriercode geschrieben, da die alte Bibliothek nicht kompatibel war.</li>
+          <li>LDR und Fototransistor für die Lichtmessung verglichen und den LDR wegen seines größeren Messbereichs gewählt.</li>
+        </ul>
+
+        <h2>Firmware &amp; Dashboard</h2>
+        <ul>
+          <li>Die Ablaufsteuerung der Pumpen und Ventile zuerst in einer <strong>Tinkercad-Simulation</strong> (3 Pumpen, 3 Ventile, 6 MOSFETs) erprobt, dann auf realer Hardware mit ESP32 und RTC umgesetzt.</li>
+          <li>Die finale ESP32-Firmware plant die Prüfungen über die RTC und legt fest, wie lange jede Pumpe und jedes Ventil läuft.</li>
+          <li>Sie erfasst außerdem die Lichtstunden durch Tageslicht und schaltet die LEDs ein, wenn das tägliche Minimum noch nicht erreicht ist.</li>
+          <li>Bei jeder Prüfung sendet sie EC, pH, Temperatur und Luftfeuchte an ein <strong>ThingsBoard</strong>-Dashboard, über das sich eine Prüfung auch per Knopfdruck starten lässt.</li>
+          <li>Ein Beispielprojekt für ESP32 + ThingsBoard mit Schritt-für-Schritt-Anleitung erstellt, damit andere im FabLab den Aufbau nachnutzen können.</li>
+        </ul>
+        <figure class="figure">
+          <img class="contain" src="../../assets/img/hydro-dashboard.png" alt="ThingsBoard-Dashboard mit pH-, EC-, Temperatur- und Luftfeuchtewerten und einem Knopf zum Starten der Wasserprüfung" loading="lazy">
+          <figcaption>ThingsBoard-Dashboard mit aktuellen Messwerten und Knopf zum Starten der Wasserprüfung.</figcaption>
+        </figure>
+
+        <h2>Elektronik</h2>
+        <ul>
+          <li>Relais, Transistoren und MOSFETs zum Schalten der 12-V-Pumpen und -Ventile verglichen und <strong>MOSFETs</strong> gewählt, wegen Belastbarkeit, Baugröße und Schaltgeschwindigkeit.</li>
+          <li>Steuerelektronik auf Lochrasterplatinen gelötet: <strong>15 MOSFET-Kanäle</strong> für 10 Pumpen und 5 Ventile, Sensoranschlüsse und eine Trägerplatine für den ESP32.</li>
+          <li>Der ESP32 hatte nicht genug Pins für alle Geräte, daher habe ich zuerst einen Arduino Uno als UART-Porterweiterung getestet. Danach habe ich eine <strong>74HC4051-Multiplexerplatine in KiCad</strong> (doppelseitig) entworfen, auf einer Platinenfräse gefertigt, bestückt und getestet.</li>
+        </ul>
+        <div class="gallery">
+          <figure class="figure">
+            <img src="../../assets/img/hydro-electronics.jpg" alt="Lochrasterplatinen mit MOSFETs, ESP32 und Sensoren" loading="lazy">
+            <figcaption>Lochrasterplatinen mit MOSFETs, ESP32, RTC und Sensoren.</figcaption>
+          </figure>
+          <figure class="figure">
+            <img src="../../assets/img/hydro-mux-pcb.jpg" alt="Gefräste Multiplexerplatine mit 74HC4051 und Stiftleisten" loading="lazy">
+            <figcaption>Die gefräste und bestückte 74HC4051-Multiplexerplatine.</figcaption>
+          </figure>
+        </div>
+
+        <h2>Konstruktion</h2>
+        <ul>
+          <li>Desktop-Farm in <strong>Fusion 360</strong> konstruiert: ein Tank in der Größe handelsüblicher Boxen, ein Deckel für die Pflanzbehälter und eine LED-Halterung darüber.</li>
+          <li>Sensorbox und <strong>Sensorklemmen</strong> konstruiert. Die Passform habe ich mit einem lasergeschnittenen Prototyp geprüft und die finale Version mit M4-Mutterschlitzen zum Nachjustieren 3D-gedruckt.</li>
+          <li>Restwasser (etwa 2&nbsp;cm) in der Sensorbox beseitigt, indem der Ablauf in eine seitliche Ecke verlegt und ein <strong>geneigter 3D-gedruckter Ständer</strong> konstruiert wurde.</li>        </ul>
+        <div class="gallery">
+          <figure class="figure">
+            <img class="contain" src="../../assets/img/hydro-design.jpg" alt="Fusion-360-Modell der Desktop-Farm mit Tank, Deckel und LED-Halterung" loading="lazy">
+            <figcaption>Entwurf der Desktop-Farm in Fusion 360.</figcaption>
+          </figure>
+          <figure class="figure">
+            <img src="../../assets/img/hydro-clamps.jpg" alt="3D-gedruckte Klemmen an EC- und pH-Sensor" loading="lazy">
+            <figcaption>3D-gedruckte Sensorklemmen.</figcaption>
+          </figure>
+          <figure class="figure">
+            <img src="../../assets/img/hydro-sensor-box.jpg" alt="Sensorbox auf geneigtem 3D-gedrucktem Ständer" loading="lazy">
+            <figcaption>Sensorbox auf dem geneigten Ständer.</figcaption>
+          </figure>
+          <figure class="figure">
+            <img src="../../assets/img/hydro-pumps.jpg" alt="Schlauchpumpen und Ventile in lasergeschnittenen Halterungen" loading="lazy">
+            <figcaption>Pumpen und Ventile in lasergeschnittenen Halterungen.</figcaption>
+          </figure>
+        </div>
+
+      </article>
+
+      <aside class="facts">
+        <dl>
+          <dt>Kontext</dt><dd>Praktikum, FabLab Kamp-Lintfort</dd>
+          <dt>Zeitraum</dt><dd>Mai – Okt. 2022</dd>
+          <dt>Meine Rolle</dt><dd>Sensorik, Firmware, Dashboard, Elektronik und Konstruktion</dd>
+          <dt>Technik</dt><dd>ESP32, Arduino, ThingsBoard, DS3231-RTC, KiCad, Fusion 360, Tinkercad, 3D-Druck</dd>
+        </dl>
+      </aside>
+    </div>
+  </div>
+
+  <nav class="project-nav">
+    <div class="wrap">
+      <a href="pcb-production.html">← Vorheriges Projekt<br><small>Leiterplattenfertigung &amp; Test</small></a>
+      <a href="shorter-projects.html" style="text-align:right">Nächstes Projekt →<br><small>Antennensimulation &amp; Software-Tools</small></a>
+    </div>
+  </nav>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>© 2026 Monish Suresh</span>
+    <span><a href="../../impressum.html">Impressum</a> · <a href="../../datenschutz.html">Datenschutz</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

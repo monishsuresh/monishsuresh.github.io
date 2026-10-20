@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Antenna simulation &amp; software tools – Monish Suresh</title>
+  <meta name="description" content="Three shorter projects at RF-Frontend: a dipole antenna simulation in Python with MEEP, compared with CST Studio reference results, a C#/.NET desktop application for controlling voltage probes, and Angular forms for an inventory management system.">
+  <meta name="color-scheme" content="light">
+  <link rel="alternate" hreflang="de" href="../de/projects/shorter-projects.html">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">Monish Suresh</a>
+    <nav class="nav">
+      <a href="../index.html#projects">Projects</a>
+      <a href="../index.html#contact">Contact</a>
+      <a class="lang" href="../de/projects/shorter-projects.html" hreflang="de" lang="de" title="Deutsche Version">DE</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="project-hero blue">
+    <div class="wrap">
+      <a class="back" href="../index.html#projects">← Back to all projects</a>
+      <h1>Antenna simulation &amp; software tools</h1>
+      <p class="lead">Three shorter projects from my student job at RF-Frontend: an antenna simulation with the open-source package MEEP, a C#/.NET desktop application for controlling voltage probes, and forms for the company's Angular inventory management system.</p>
+      <ul class="tags"><li>Python</li><li>MEEP</li><li>RF</li><li>C#/.NET</li><li>Angular</li></ul>
+    </div>
+  </section>
+
+  <div class="project-body">
+    <div class="wrap">
+      <article>
+        <p><em>This is company work at RF-Frontend, so details are kept general for confidentiality.</em></p>
+        <h2>Dipole antenna simulation with MEEP</h2>
+        <p>Commercial electromagnetic solvers like CST Studio are powerful but expensive. This project tested whether the open-source FDTD package MEEP could reproduce CST results for a reference antenna, a cylindrical dipole.</p>
+        <ul>
+          <li>Modelled a cylindrical dipole antenna in MEEP using Python</li>
+          <li>Computed the S-parameters (reflection behaviour over frequency)</li>
+          <li>Computed the far-field radiation pattern</li>
+          <li>Compared my results with reference results a colleague had produced in CST Studio, to validate the MEEP workflow</li>
+        </ul>
+        <!-- TODO: add details such as frequency range, antenna dimensions, mesh resolution -->
+        <!-- MEEP is open source: a generic dipole simulation rerun at home (no company data) could provide S11 / far-field plots here later. -->
+        <!-- TODO: how closely did MEEP match CST? -->
+        <!-- <p>[How well the MEEP results agreed with CST, and what that means for the workflow.]</p> -->
+        <!-- Note: check with RF-Frontend before publishing code or plots from this work. -->
+
+        <h2>Voltage probe control application (C#/.NET)</h2>
+        <p>A C#/.NET desktop application developed to configure and control voltage probes from a PC, where I contributed the following:</p>
+        <ul>
+          <li>Extended the application to support a new probe variant</li>
+          <li>Found and fixed bugs in the existing application</li>
+        </ul>
+
+        <h2>Inventory management system (Angular)</h2>
+        <p>A web-based inventory management system, built with Angular, developed to keep track of electronic components, and where they are stored. I contributed the following to the system:</p>
+        <ul>
+          <li>Implemented forms to add and modify storage locations, the places where components are kept</li>
+          <li>Implemented forms to add and modify components</li>
+        </ul>
+      </article>
+
+      <aside class="facts">
+        <dl>
+          <dt>Context</dt><dd>Student worker, RF-Frontend</dd>
+          <dt>My role</dt><dd>Simulation setup and validation; desktop and web application development</dd>
+          <dt>Tech</dt><dd>Python, MEEP, FDTD, C#/.NET, Angular</dd>
+        </dl>
+      </aside>
+    </div>
+  </div>
+
+  <nav class="project-nav">
+    <div class="wrap">
+      <a href="hydroponic.html">← Previous project<br><small>ESP32 hydroponic farm controller</small></a>
+      <a href="bachelor-thesis.html" style="text-align:right">Next project →<br><small>Bachelor thesis: buck converter control with GPR</small></a>
+    </div>
+  </nav>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>© 2026 Monish Suresh</span>
+    <span><a href="../impressum.html">Impressum</a> · <a href="../datenschutz.html">Datenschutz</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

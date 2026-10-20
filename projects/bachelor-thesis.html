@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Buck converter control using Gaussian Process Regression – Monish Suresh</title>
+  <meta name="description" content="Bachelor thesis: a machine-learning (Gaussian Process Regression) digital controller for a self-designed buck converter, benchmarked against a commercial analog buck converter IC.">
+  <meta name="color-scheme" content="light">
+  <link rel="alternate" hreflang="de" href="../de/projects/bachelor-thesis.html">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">Monish Suresh</a>
+    <nav class="nav">
+      <a href="../index.html#personal">Projects</a>
+      <a href="../index.html#contact">Contact</a>
+      <a class="lang" href="../de/projects/bachelor-thesis.html" hreflang="de" lang="de" title="Deutsche Version">DE</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="project-hero coral">
+    <div class="wrap">
+      <a class="back" href="../index.html#personal">← Back to all projects</a>
+      <h1>Buck converter control using Gaussian Process Regression</h1>
+      <p class="lead">Bachelor thesis: I designed a buck converter, built a machine-learning controller for it in Python, and benchmarked it against a commercial analog buck converter IC.</p>
+      <ul class="tags"><li>Python</li><li>scikit-learn</li><li>Gaussian Process Regression</li><li>Power electronics</li><li>KiCad</li><li>Analog Discovery 2</li></ul>
+    </div>
+  </section>
+
+  <div class="project-body">
+    <div class="wrap">
+      <article>
+        <div class="stats">
+          <div class="stat"><b>±1&nbsp;%</b><span>voltage regulation accuracy</span></div>
+          <div class="stat"><b>R² 0.991</b><span>GPR model on test data</span></div>
+          <div class="stat"><b>108 vs 36&nbsp;ms</b><span>settling time vs analog IC</span></div>
+          <div class="stat"><b>2.19&nbsp;ms</b><span>control loop period</span></div>
+        </div>
+
+        <h2>The question</h2>
+        <p>Buck converters step a higher voltage down to a lower one and are normally regulated by fast analog control circuits. A load change involving a capacitive (RC) load is still a hard case, because the charging capacitors cause a transient that slows regulation down.</p>
+        <p>My thesis asked whether a <strong>data-driven controller based on Gaussian Process Regression (GPR)</strong> can hold the output voltage during such a load change, and how it compares with a conventional buck converter IC (Texas Instruments TPS629210).</p>
+
+        <figure class="figure">
+          <img class="contain" src="../assets/img/thesis-block-diagram.png" alt="Block diagram: shunt voltage, load voltage and voltage error feed the GPR controller, which sets the PWM duty cycle of the buck converter" loading="lazy">
+          <figcaption>The GPR controller predicts the PWM duty cycle from the measured load voltage, shunt voltage and voltage error.</figcaption>
+        </figure>
+
+        <h2>Hardware</h2>
+        <ul>
+          <li>Designed an <strong>asynchronous buck converter</strong> (100&nbsp;kHz switching, AOI4286 MOSFET, 1N5817 Schottky diode). I prototyped it on perfboard, then designed a <strong>PCB in KiCad</strong>, which was fabricated at RF-Frontend.</li>
+          <li>Traced high-frequency noise on the output to voltage spikes in the PWM signal and removed it by adding a <strong>comparator</strong> stage.</li>
+          <li>Diagnosed a <strong>ground loop</strong> (5.48&nbsp;V between the measurement and supply grounds) and solved it with an <strong>optocoupler</strong>.</li>
+          <li>Built a switchable test load: a 1&nbsp;kΩ base load plus an RC load (470&nbsp;Ω ∥ 2&nbsp;×&nbsp;1&nbsp;mF) connected through a MOSFET, with a shunt resistor to measure the load current.</li>
+        </ul>
+        <div class="gallery">
+          <figure class="figure">
+            <img src="../assets/img/thesis-pcb.jpg" alt="Fabricated buck converter PCB" loading="lazy">
+            <figcaption>The buck converter PCB designed in KiCad.</figcaption>
+          </figure>
+          <figure class="figure">
+            <img src="../assets/img/thesis-setup.jpg" alt="Test setup with Analog Discovery 2, breadboard and buck converter" loading="lazy">
+            <figcaption>Test setup with the Analog Discovery 2.</figcaption>
+          </figure>
+        </div>
+
+        <h2>Software &amp; machine learning</h2>
+        <ul>
+          <li>Wrote a <strong>Python module for the Analog Discovery 2</strong> (WaveForms SDK) that generates the PWM signal, measures voltages and switches the test load.</li>
+          <li>Chose a buffer-averaged measurement (500 samples) over single samples: the noise dropped from 115&nbsp;mV to 25&nbsp;mV (standard deviation), at 0.76&nbsp;ms instead of 0.18&nbsp;ms latency.</li>
+          <li>Collected a dataset of 475 training and 475 test samples with random duty cycles across load resistances from 220&nbsp;Ω to 1&nbsp;kΩ.</li>
+          <li>Trained GPR models with <strong>scikit-learn</strong>, tuned hyperparameters with <strong>Bayesian optimization</strong> and compared four kernels. The Matérn kernel performed best (R²&nbsp;0.991, MAE&nbsp;2.18 percentage points of duty cycle).</li>
+          <li>Developed three controller versions: basic GPR, a variant that applies maximum duty cycle during the initial voltage drop, and a <strong>GPR&nbsp;+&nbsp;PI controller</strong> with anti-windup that removes the remaining steady-state error.</li>
+        </ul>
+
+        <h2>Results</h2>
+        <figure class="figure">
+          <img class="contain" src="../assets/img/thesis-results.png" alt="Plot of load voltage over time for the buck converter IC and the GPR+PI controller during load changes" loading="lazy">
+          <figcaption>Load voltage of the analog IC and the GPR+PI controller when the RC load is connected (≈1&nbsp;s) and disconnected (≈2&nbsp;s).</figcaption>
+        </figure>
+        <ul>
+          <li><strong>Accuracy:</strong> both controllers held the load voltage within 1&nbsp;% of the target. After the RC load was connected, the GPR+PI controller had a lower steady-state error than the IC (4–17&nbsp;mV vs. 22–27&nbsp;mV MAE).</li>
+          <li><strong>Speed:</strong> the GPR controller settled in 108&nbsp;ms against 36&nbsp;ms for the IC. I traced the gap to the 2.19&nbsp;ms control loop period (0.7&nbsp;ms reading voltages, 0.7&nbsp;ms computing, 0.8&nbsp;ms updating the PWM signal), mostly USB and SDK overhead.</li>
+          <li>The analysis showed that a loop about 3× faster (≈0.73&nbsp;ms) should match the IC, so the approach is competitive once these latencies are removed.</li>
+        </ul>
+
+        <h2>Next steps</h2>
+        <p>The natural continuation is to run the controller on a <strong>microcontroller such as an STM32</strong>: train the GPR model offline, deploy it to the device, and measure and generate the PWM signal on-chip, removing the USB latency. Further ideas include giving the model a history of past measurements so it learns the transient behaviour, and using identical circuit topologies for a fairer comparison.</p>
+      </article>
+
+      <aside class="facts">
+        <dl>
+          <dt>Context</dt><dd>B.Sc. thesis, Hochschule Rhein-Waal, in cooperation with RF-Frontend GmbH</dd>
+          <dt>Submitted</dt><dd>June 2025</dd>
+          <dt>My role</dt><dd>Sole author: circuit and PCB design, software, ML model, evaluation</dd>
+          <dt>Tech</dt><dd>Python, scikit-learn, scikit-optimize, WaveForms SDK, KiCad, Analog Discovery 2</dd>
+        </dl>
+        <a class="btn primary" href="https://github.com/monishsuresh/Thesis-Source-Code" rel="noopener">View code on GitHub</a>
+        <a class="btn" href="https://drive.google.com/file/d/1gBkcHnLzC2Oy_JHDTUy7ZVJLLnsl0aaL/view?usp=sharing" rel="noopener" target="_blank">Read the thesis (PDF)</a>
+      </aside>
+    </div>
+  </div>
+
+  <nav class="project-nav">
+    <div class="wrap">
+      <a href="shorter-projects.html">← Previous project<br><small>Antenna simulation &amp; software tools</small></a>
+      <span></span>
+    </div>
+  </nav>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>© 2026 Monish Suresh</span>
+    <span><a href="../impressum.html">Impressum</a> · <a href="../datenschutz.html">Datenschutz</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

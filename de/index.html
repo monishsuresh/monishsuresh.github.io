@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Monish Suresh – Embedded-Firmware &amp; Hardware</title>
+  <meta name="description" content="Monish Suresh – M.Sc.-Student Information Engineering and Computer Science. Embedded-Firmware (STM32, ESP32), Leiterplattenfertigung und HF-Simulation. Kamp-Lintfort.">
+  <meta name="color-scheme" content="light">
+  <link rel="alternate" hreflang="en" href="../index.html">
+  <link rel="alternate" hreflang="de" href="index.html">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="#top">Monish Suresh</a>
+    <nav class="nav">
+      <a class="hide-sm" href="#projekte">Projekte</a>
+      <a class="hide-sm" href="#persoenlich">Akademisch/Persönlich</a>
+      <a class="hide-sm" href="#erfahrung">Erfahrung</a>
+      <a class="hide-sm" href="#ausbildung">Ausbildung</a>
+      <a class="hide-sm" href="#kenntnisse">Kenntnisse</a>
+      <a href="#kontakt">Kontakt</a>
+      <a class="lang" href="../index.html" hreflang="en" lang="en" title="English version">EN</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <h1>Monish Suresh</h1>
+        <p class="role">Embedded-Firmware &amp; Hardware: STM32, ESP32, Leiterplattenentwicklung und -fertigung</p>
+        <p class="meta">M.Sc.-Student Information Engineering &amp; Computer Science · Kamp-Lintfort · Deutsch B2</p>
+        <div class="buttons">
+          <a class="btn primary" href="../assets/CV_Monish_Suresh.pdf" download>Lebenslauf (PDF)</a>
+          <a class="btn" href="mailto:monishsuresh2000@gmail.com">E-Mail</a>
+          <a class="btn" href="https://www.linkedin.com/in/monish-suresh-187342227/" rel="noopener">LinkedIn</a>        </div>
+      </div>
+      <img class="photo" src="../assets/img/photo.jpg" alt="Porträt von Monish Suresh" width="200" height="259">
+    </div>
+  </section>
+
+  <section class="about">
+    <div class="wrap">
+      <h2>Über mich</h2>
+      <p>Ich studiere im Master Information Engineering and Computer Science an der Hochschule Rhein-Waal. Seit drei Jahren arbeite ich praktisch an der Schnittstelle von Software und Hardware: STM32-Firmware, ESP32-IoT-Systeme sowie Fertigung und Test von Leiterplatten, vom Bestückungsautomaten bis zum Handlöten von 0201-Bauteilen.</p>
+      <!-- TODO: an deine Zielstellen und Verfügbarkeit anpassen -->
+      <p>Ich suche eine <strong>Vollzeitstelle</strong> in den Bereichen Embedded Systems, Firmware- oder Hardwareentwicklung. Ich bin kurzfristig verfügbar: Meine Kündigungsfrist beträgt <strong>einen Monat zum Monatsende</strong>. Ich spreche fließend Englisch und Deutsch auf B2-Niveau.</p>
+    </div>
+  </section>
+
+  <section id="projekte">
+    <div class="wrap">
+      <h2>Berufliche Projekte</h2>
+      <div class="projects-grid">
+
+        <article class="card">
+          <div class="shot cover"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><rect x="18" y="18" width="28" height="28" rx="3"/><rect x="26" y="26" width="12" height="12" rx="1"/><path d="M24 10v8M32 10v8M40 10v8M24 46v8M32 46v8M40 46v8M10 24h8M10 32h8M10 40h8M46 24h8M46 32h8M46 40h8"/></svg><span>STM32 · Modbus</span></div>
+          <div class="body">
+            <h3>STM32-Firmware: Modbus &amp; Firmware-Updates</h3>
+            <p>Firmwareentwicklung bei RF-Frontend (aus Vertraulichkeitsgründen allgemein beschrieben).</p>
+            <ul>
+              <li>Timer und Interrupts, die GPIO-Pins bei ausbleibender UART-Kommunikation auf sichere Werte setzen</li>
+              <li>Erweiterung des Modbus-Befehlssatzes eines STM32-basierten Geräts</li>
+              <li>Neue Firmware-Update-Optionen und Fehlerbehebung im Bestandscode</li>
+            </ul>
+            <ul class="tags"><li>STM32</li><li>C</li><li>Modbus</li><li>STM32Cube</li></ul>
+            <p class="links"><a href="projects/stm32-firmware.html">Projektdetails →</a></p>
+          </div>
+        </article>
+
+        <article class="card">
+          <img class="shot contain" src="../assets/img/autotronik-pick-and-place.jpg" alt="Autotronik-Bestückungsautomat (Bild: Autotronik)" loading="lazy">
+          <div class="body">
+            <h3>Leiterplattenfertigung &amp; Test</h3>
+            <p>Praktische Elektronikfertigung bei RF-Frontend.</p>
+            <ul>
+              <li>Bedienung des Bestückungsautomaten; Auftrag von Lotpaste</li>
+              <li>Handlöten von SMD-Bauteilen bis 0201 sowie Steckverbindern</li>
+              <li>Test und Abgleich fertiger Platinen mit dem Oszilloskop; Inspektion und Reparatur fehlerhafter Platinen</li>
+            </ul>
+            <ul class="tags"><li>SMD</li><li>Bestückung</li><li>Inspektion</li><li>Test</li></ul>
+            <p class="links"><a href="projects/pcb-production.html">Projektdetails →</a></p>
+          </div>
+        </article>
+
+        <article class="card">
+          <img class="shot" src="../assets/img/hydro-structure.jpg" alt="Hydroponik-System mit Sensorboxen, Pumpen und Ventilen" loading="lazy">
+          <div class="body">
+            <h3>ESP32-Steuerung für eine Hydroponik-Farm</h3>
+            <p>FabLab Kamp-Lintfort: IoT-System zur Überwachung und Automatisierung einer Desktop-Hydroponik-Farm.</p>
+            <ul>
+              <li>Automatischer Prüfzyklus: pH- und EC-Box, Spülen und Sensorlagerung, 1–2× täglich</li>
+              <li>15 MOSFET-Kanäle für 10 Pumpen und 5 Ventile; RTC-gesteuerte ESP32-Firmware</li>
+              <li>ThingsBoard-Dashboard mit Live-Werten und Fernstart</li>
+              <li>74HC4051-Multiplexerplatine in KiCad; Fusion 360 und 3D-gedruckte Teile</li>
+            </ul>
+            <ul class="tags"><li>ESP32</li><li>C/C++</li><li>ThingsBoard</li><li>KiCad</li><li>Fusion 360</li></ul>
+            <p class="links"><a href="projects/hydroponic.html">Projektdetails →</a></p>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="shot cover"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M32 12v17M32 35v17"/><path d="M22 22a14 14 0 0 0 0 20M42 22a14 14 0 0 1 0 20"/><path d="M15 16a22 22 0 0 0 0 32M49 16a22 22 0 0 1 0 32"/></svg><span>MEEP · C# · Angular</span></div>
+          <div class="body">
+            <h3>Antennensimulation &amp; Software-Tools</h3>
+            <p>Drei kleinere Projekte bei RF-Frontend.</p>
+            <ul>
+              <li>Simulation einer Dipolantenne (S-Parameter, Fernfeld) in Python mit MEEP, abgeglichen mit Referenzergebnissen aus CST Studio</li>
+              <li>Erweiterung der C#/.NET-Tastkopf-Steuersoftware um eine neue Variante und Fehlerbehebung</li>
+              <li>Angular-Formulare zum Anlegen und Bearbeiten von Lagerorten und Bauteilen im Lagerverwaltungssystem des Unternehmens</li>
+            </ul>
+            <ul class="tags"><li>Python</li><li>MEEP</li><li>C#/.NET</li><li>Angular</li></ul>
+            <p class="links"><a href="projects/shorter-projects.html">Projektdetails →</a></p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="persoenlich">
+    <div class="wrap">
+      <h2>Akademische/Persönliche Projekte</h2>
+      <div class="projects-grid">
+
+        <article class="card">
+          <img class="shot" src="../assets/img/thesis-pcb.jpg" alt="Leiterplatte des Abwärtswandlers aus der Bachelorarbeit" loading="lazy">
+          <div class="body">
+            <h3>Bachelorarbeit: Abwärtswandler-Regelung mit maschinellem Lernen</h3>
+            <p>Ein Regler auf Basis von Gaußprozess-Regression für einen selbst entwickelten Abwärtswandler, verglichen mit einem kommerziellen analogen IC.</p>
+            <ul>
+              <li>Wandler und Leiterplatte in KiCad entworfen; PWM-Rauschen und Masseschleife behoben</li>
+              <li>GPR-Modell mit scikit-learn und Bayes'scher Optimierung trainiert (R² 0,991)</li>
+              <li>Spannung bei Lastwechseln innerhalb von 1&nbsp;% gehalten; Latenz als Schlüssel zur IC-Geschwindigkeit identifiziert</li>
+            </ul>
+            <ul class="tags"><li>Python</li><li>scikit-learn</li><li>GPR</li><li>KiCad</li><li>Leistungselektronik</li></ul>
+            <p class="links"><a href="projects/bachelor-thesis.html">Projektdetails →</a> · <a href="https://drive.google.com/file/d/1gBkcHnLzC2Oy_JHDTUy7ZVJLLnsl0aaL/view?usp=sharing" rel="noopener" target="_blank">Arbeit (PDF)</a></p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="erfahrung">
+    <div class="wrap">
+      <h2>Berufserfahrung</h2>
+      <ol class="timeline">
+        <li>
+          <div class="when">Nov. 2022 – heute</div>
+          <div>
+            <h3>Werkstudent</h3>
+            <p class="where">RF-Frontend · Kamp-Lintfort</p>
+            <ul>
+              <li>STM32-Firmware: Modbus-Funktionen, Firmware-Updates, Fehlerbehebung</li>
+              <li>Antennensimulation mit Python/MEEP, abgeglichen mit CST-Referenzergebnissen</li>
+              <li>Angular-Frontend für ein Lagerverwaltungssystem</li>
+              <li>C#/.NET-Anwendung zur Tastkopfsteuerung</li>
+              <li>Leiterplattenfertigung, Löten, Test und Abgleich</li>
+            </ul>
+          </div>
+        </li>
+        <li>
+          <div class="when">Mai – Okt. 2022</div>
+          <div>
+            <h3>Praktikant</h3>
+            <p class="where">FabLab Kamp-Lintfort</p>
+            <ul>
+              <li>ESP32-IoT-Firmware und Regelung für eine Hydroponik-Farm</li>
+              <li>ThingsBoard-Dashboard, Fusion-360-Konstruktion, 3D-Druck, KiCad-Platinen</li>
+            </ul>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="ausbildung">
+    <div class="wrap">
+      <h2>Ausbildung</h2>
+      <ol class="timeline">
+        <li>
+          <div class="when">Okt. 2025 – heute</div>
+          <div>
+            <h3>M.Sc. Information Engineering and Computer Science</h3>
+            <p class="where">Hochschule Rhein-Waal</p>
+          </div>
+        </li>
+        <li>
+          <div class="when">2019 – 2025</div>
+          <div>
+            <h3>B.Sc. Communication and Information Engineering</h3>
+            <p class="where">Hochschule Rhein-Waal</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="kenntnisse">
+    <div class="wrap">
+      <h2>Kenntnisse</h2>
+      <div class="skills">
+        <div>
+          <h3>Programmierung</h3>
+          <ul class="tags"><li>C</li><li>Python</li><li>C#</li><li>Angular</li></ul>
+        </div>
+        <div>
+          <h3>Embedded</h3>
+          <ul class="tags"><li>STM32</li><li>STM32Cube</li><li>ESP32</li><li>Arduino</li><li>Modbus</li></ul>
+        </div>
+        <div>
+          <h3>Hardware</h3>
+          <ul class="tags"><li>KiCad</li><li>LTspice</li><li>SMD-Löten</li><li>Platinentest</li></ul>
+        </div>
+        <div>
+          <h3>Werkzeuge</h3>
+          <ul class="tags"><li>Git</li><li>MATLAB</li><li>Simulink</li><li>MEEP</li><li>Fusion 360</li></ul>
+        </div>
+        <div>
+          <h3>Sprachen</h3>
+          <ul class="tags"><li>Englisch (fließend)</li><li>Deutsch (B2)</li><li>Tamil</li><li>Hindi</li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="kontakt" class="contact">
+    <div class="wrap">
+      <h2>Kontakt</h2>
+      <p>Am schnellsten erreichen Sie mich per E-Mail. Referenzen und weitere Projektdetails sende ich gerne zu.</p>
+      <div class="buttons">
+        <a class="btn primary" href="mailto:monishsuresh2000@gmail.com">monishsuresh2000@gmail.com</a>
+        <a class="btn" href="https://www.linkedin.com/in/monish-suresh-187342227/" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>© 2026 Monish Suresh</span>
+    <span><a href="../impressum.html">Impressum</a> · <a href="../datenschutz.html">Datenschutz</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

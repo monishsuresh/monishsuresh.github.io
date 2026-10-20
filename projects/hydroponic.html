@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ESP32 hydroponic farm controller – Monish Suresh</title>
+  <meta name="description" content="An ESP32-based IoT system that automatically checks water quality in a hydroponic farm, built during an internship at FabLab Kamp-Lintfort: sensors, pump and valve control, ThingsBoard dashboard, PCB and mechanical design.">
+  <meta name="color-scheme" content="light">
+  <link rel="alternate" hreflang="de" href="../de/projects/hydroponic.html">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">Monish Suresh</a>
+    <nav class="nav">
+      <a href="../index.html#projects">Projects</a>
+      <a href="../index.html#contact">Contact</a>
+      <a class="lang" href="../de/projects/hydroponic.html" hreflang="de" lang="de" title="Deutsche Version">DE</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="project-hero teal">
+    <div class="wrap">
+      <a class="back" href="../index.html#projects">← Back to all projects</a>
+      <h1>ESP32 hydroponic farm controller</h1>
+      <p class="lead">An IoT system that automatically checks and maintains the water quality of a hydroponic farm, built during my internship at FabLab Kamp-Lintfort. I worked on the sensors, firmware, dashboard, electronics and mechanical parts.</p>
+      <ul class="tags"><li>ESP32</li><li>Arduino</li><li>ThingsBoard</li><li>KiCad</li><li>Fusion 360</li><li>3D printing</li></ul>
+    </div>
+  </section>
+
+  <div class="project-body">
+    <div class="wrap">
+      <article>
+        <h2>Overview</h2>
+        <p>In a hydroponic farm the plant roots sit in water at all times, so the water's electrical conductivity (EC) and pH need constant monitoring. The goal was a system that runs these checks automatically, controls the grow lights, and can be monitored and triggered remotely through a web dashboard.</p>
+
+        <figure class="figure">
+          <img src="../assets/img/hydro-structure.jpg" alt="Hydroponic system during assembly: plastic boxes connected by tubing to pumps and valves" loading="lazy">
+          <figcaption>The system during assembly: main tank, sensor boxes, distilled-water and KCl boxes, connected through pumps and valves.</figcaption>
+        </figure>
+
+        <h2>How the water-quality check works</h2>
+        <p>The pH sensor has to be stored in potassium chloride (KCl) solution while the EC sensor must stay dry, so each sensor got its own box. One check cycle involves the following steps:</p>
+        <ol>
+          <li>Tank water is pumped into the pH sensor box and held for a few minutes while readings are taken.</li>
+          <li>The water moves on to the EC sensor box for the EC reading, then is pumped back into the main tank.</li>
+          <li>Both boxes are rinsed with distilled water.</li>
+          <li>KCl solution is pumped into the pH box to store the sensor, then drained and rinsed again before the next check.</li>
+        </ol>
+
+        <h2>Sensors &amp; calibration</h2>
+        <ul>
+          <li>Calibrated the EC sensor with temperature compensation using 12.88&nbsp;mS/cm and 1413&nbsp;µS/cm reference solutions, and the pH sensor with pH&nbsp;4 and pH&nbsp;9 buffers.</li>
+          <li>Ran a <strong>3-day stability test</strong> with hourly readings timed by a DS3231 RTC; both sensors gave stable results.</li>
+          <li>Connected the EC and pH sensors through an <strong>external ADC</strong>, which was more accurate than the ESP32's built-in ADC.</li>
+          <li>When the original pH sensor became inaccurate, I switched to a new one and wrote my own calibration code, since the old library was incompatible.</li>
+          <li>Compared an LDR with a phototransistor for light sensing and chose the LDR for its wider measurement range.</li>
+        </ul>
+
+        <h2>Firmware &amp; dashboard</h2>
+        <ul>
+          <li>Prototyped the pump and valve sequencing in a <strong>Tinkercad simulation</strong> (3 pumps, 3 valves, 6 MOSFETs), then rebuilt it on real hardware with an ESP32 and an RTC.</li>
+          <li>The final ESP32 firmware uses the RTC to schedule the checks and to set how long each pump and valve runs.</li>
+          <li>It also tracks the light hours the plants get from daylight and switches on the LEDs if they haven't reached the daily minimum.</li>
+          <li>During each check it sends the EC, pH, temperature and humidity readings to a <strong>ThingsBoard</strong> dashboard, which also has a button to start a check remotely.</li>
+          <li>Built a sample ESP32 + ThingsBoard project with a step-by-step guide, so others at the FabLab could reuse the setup.</li>
+        </ul>
+        <figure class="figure">
+          <img class="contain" src="../assets/img/hydro-dashboard.png" alt="ThingsBoard dashboard showing pH, EC, temperature and humidity values and a button to start the water check" loading="lazy">
+          <figcaption>ThingsBoard dashboard with the latest readings and a "check water quality" button.</figcaption>
+        </figure>
+
+        <h2>Electronics</h2>
+        <ul>
+          <li>Compared relays, transistors and MOSFETs for switching the 12&nbsp;V pumps and valves, and chose <strong>MOSFETs</strong> for their power handling, small size and switching speed.</li>
+          <li>Soldered the control electronics on perfboards: <strong>15 MOSFET channels</strong> for 10 pumps and 5 valves, sensor connections and a carrier board for the ESP32.</li>
+          <li>The ESP32 didn't have enough pins for every device, so I first tried an Arduino Uno as a UART port expander. I then designed a <strong>74HC4051 multiplexer board in KiCad</strong> (double-sided), produced it on a PCB milling machine, soldered it and tested it.</li>
+        </ul>
+        <div class="gallery">
+          <figure class="figure">
+            <img src="../assets/img/hydro-electronics.jpg" alt="Perfboards with MOSFETs, ESP32 and sensors wired together" loading="lazy">
+            <figcaption>Perfboards with MOSFETs, ESP32, RTC and sensors.</figcaption>
+          </figure>
+          <figure class="figure">
+            <img src="../assets/img/hydro-mux-pcb.jpg" alt="Milled multiplexer PCB with 74HC4051 chip and pin headers" loading="lazy">
+            <figcaption>The milled and soldered 74HC4051 multiplexer PCB.</figcaption>
+          </figure>
+        </div>
+
+        <h2>Mechanical design</h2>
+        <ul>
+          <li>Designed the desktop farm in <strong>Fusion 360</strong>: a tank sized to fit standard store-bought boxes, a lid holding the plant containers, and an LED holder above it.</li>
+          <li>Designed the sensor box and <strong>sensor clamps</strong>. I checked the fit with a laser-cut prototype, then 3D-printed the final version with M4 nut slots to adjust the grip.</li>
+          <li>Solved residual water (about 2&nbsp;cm) left in the sensor box by moving the drain to a side corner and designing a <strong>tilted 3D-printed stand</strong>.</li>
+        </ul>
+        <div class="gallery">
+          <figure class="figure">
+            <img class="contain" src="../assets/img/hydro-design.jpg" alt="Fusion 360 model of the desktop farm with tank, lid and LED holder" loading="lazy">
+            <figcaption>Desktop farm design in Fusion 360.</figcaption>
+          </figure>
+          <figure class="figure">
+            <img src="../assets/img/hydro-clamps.jpg" alt="3D-printed clamps fitted on the EC and pH sensors" loading="lazy">
+            <figcaption>3D-printed sensor clamps.</figcaption>
+          </figure>
+          <figure class="figure">
+            <img src="../assets/img/hydro-sensor-box.jpg" alt="Sensor box mounted on a tilted 3D-printed stand" loading="lazy">
+            <figcaption>Sensor box on its tilted stand.</figcaption>
+          </figure>
+          <figure class="figure">
+            <img src="../assets/img/hydro-pumps.jpg" alt="Peristaltic pumps and valves fixed in laser-cut holders with tubing" loading="lazy">
+            <figcaption>Pumps and valves in laser-cut holders.</figcaption>
+          </figure>
+        </div>
+
+      </article>
+
+      <aside class="facts">
+        <dl>
+          <dt>Context</dt><dd>Internship, FabLab Kamp-Lintfort</dd>
+          <dt>Period</dt><dd>May – Oct 2022</dd>
+          <dt>My role</dt><dd>Sensors, firmware, dashboard, electronics and mechanical design</dd>
+          <dt>Tech</dt><dd>ESP32, Arduino, ThingsBoard, DS3231 RTC, KiCad, Fusion 360, Tinkercad, 3D printing</dd>
+        </dl>
+      </aside>
+    </div>
+  </div>
+
+  <nav class="project-nav">
+    <div class="wrap">
+      <a href="pcb-production.html">← Previous project<br><small>PCB production &amp; testing</small></a>
+      <a href="shorter-projects.html" style="text-align:right">Next project →<br><small>Antenna simulation &amp; software tools</small></a>
+    </div>
+  </nav>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>© 2026 Monish Suresh</span>
+    <span><a href="../impressum.html">Impressum</a> · <a href="../datenschutz.html">Datenschutz</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

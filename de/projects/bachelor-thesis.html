@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Regelung eines Abwärtswandlers mit Gaußprozess-Regression – Monish Suresh</title>
+  <meta name="description" content="Bachelorarbeit: ein digitaler Regler auf Basis von Gaußprozess-Regression (maschinelles Lernen) für einen selbst entwickelten Abwärtswandler, verglichen mit einem kommerziellen analogen Wandler-IC.">
+  <meta name="color-scheme" content="light">
+  <link rel="alternate" hreflang="en" href="../../projects/bachelor-thesis.html">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">Monish Suresh</a>
+    <nav class="nav">
+      <a href="../index.html#persoenlich">Projekte</a>
+      <a href="../index.html#kontakt">Kontakt</a>
+      <a class="lang" href="../../projects/bachelor-thesis.html" hreflang="en" lang="en" title="English version">EN</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="project-hero coral">
+    <div class="wrap">
+      <a class="back" href="../index.html#persoenlich">← Zurück zu allen Projekten</a>
+      <h1>Regelung eines Abwärtswandlers mit Gaußprozess-Regression</h1>
+      <p class="lead">Bachelorarbeit: Ich habe einen Abwärtswandler (Buck Converter) entworfen, in Python einen Regler auf Basis von maschinellem Lernen dafür entwickelt und ihn mit einem kommerziellen analogen Wandler-IC verglichen.</p>
+      <ul class="tags"><li>Python</li><li>scikit-learn</li><li>Gaußprozess-Regression</li><li>Leistungselektronik</li><li>KiCad</li><li>Analog Discovery 2</li></ul>
+    </div>
+  </section>
+
+  <div class="project-body">
+    <div class="wrap">
+      <article>
+        <div class="stats">
+          <div class="stat"><b>±1&nbsp;%</b><span>Genauigkeit der Spannungsregelung</span></div>
+          <div class="stat"><b>R² 0,991</b><span>GPR-Modell auf Testdaten</span></div>
+          <div class="stat"><b>108 vs. 36&nbsp;ms</b><span>Einschwingzeit vs. analoges IC</span></div>
+          <div class="stat"><b>2,19&nbsp;ms</b><span>Periode des Regelkreises</span></div>
+        </div>
+
+        <h2>Fragestellung</h2>
+        <p>Abwärtswandler setzen eine höhere Spannung auf eine niedrigere herab und werden üblicherweise von schnellen analogen Regelschaltungen geregelt. Ein Lastwechsel mit kapazitiver (RC-)Last bleibt dennoch schwierig, weil die sich aufladenden Kondensatoren einen Einschwingvorgang verursachen, der die Regelung verlangsamt.</p>
+        <p>Meine Arbeit untersuchte, ob ein <strong>datengetriebener Regler auf Basis von Gaußprozess-Regression (GPR)</strong> die Ausgangsspannung bei einem solchen Lastwechsel halten kann und wie er im Vergleich zu einem herkömmlichen Wandler-IC (Texas Instruments TPS629210) abschneidet.</p>
+
+        <figure class="figure">
+          <img class="contain" src="../../assets/img/thesis-block-diagram.png" alt="Blockdiagramm: Shunt-Spannung, Lastspannung und Regelabweichung gehen in den GPR-Regler, der das PWM-Tastverhältnis des Abwärtswandlers vorgibt" loading="lazy">
+          <figcaption>Der GPR-Regler sagt das PWM-Tastverhältnis aus Lastspannung, Shunt-Spannung und Regelabweichung vorher.</figcaption>
+        </figure>
+
+        <h2>Hardware</h2>
+        <ul>
+          <li>Entwurf eines <strong>asynchronen Abwärtswandlers</strong> (100&nbsp;kHz Schaltfrequenz, MOSFET AOI4286, Schottky-Diode 1N5817). Nach einem Prototyp auf Lochraster habe ich eine <strong>Leiterplatte in KiCad</strong> entworfen, die bei RF-Frontend gefertigt wurde.</li>
+          <li>Hochfrequentes Rauschen am Ausgang auf Spannungsspitzen im PWM-Signal zurückgeführt und durch eine zusätzliche <strong>Komparatorstufe</strong> beseitigt.</li>
+          <li>Eine <strong>Masseschleife</strong> (5,48&nbsp;V zwischen Mess- und Versorgungsmasse) erkannt und mit einem <strong>Optokoppler</strong> behoben.</li>
+          <li>Schaltbare Testlast aufgebaut: 1&nbsp;kΩ Grundlast plus RC-Last (470&nbsp;Ω ∥ 2&nbsp;×&nbsp;1&nbsp;mF), zugeschaltet über einen MOSFET, mit Shunt-Widerstand zur Strommessung.</li>
+        </ul>
+        <div class="gallery">
+          <figure class="figure">
+            <img src="../../assets/img/thesis-pcb.jpg" alt="Gefertigte Leiterplatte des Abwärtswandlers" loading="lazy">
+            <figcaption>Die in KiCad entworfene Leiterplatte.</figcaption>
+          </figure>
+          <figure class="figure">
+            <img src="../../assets/img/thesis-setup.jpg" alt="Versuchsaufbau mit Analog Discovery 2, Steckbrett und Abwärtswandler" loading="lazy">
+            <figcaption>Versuchsaufbau mit dem Analog Discovery 2.</figcaption>
+          </figure>
+        </div>
+
+        <h2>Software &amp; maschinelles Lernen</h2>
+        <ul>
+          <li><strong>Python-Modul für den Analog Discovery 2</strong> (WaveForms SDK) entwickelt, das das PWM-Signal erzeugt, Spannungen misst und die Testlast schaltet.</li>
+          <li>Gepufferte Mittelwertmessung (500 Abtastwerte) statt Einzelmessung gewählt: Das Rauschen sank von 115&nbsp;mV auf 25&nbsp;mV (Standardabweichung), bei 0,76&nbsp;ms statt 0,18&nbsp;ms Latenz.</li>
+          <li>Datensatz mit je 475 Trainings- und Testbeispielen aufgenommen, mit zufälligen Tastverhältnissen und Lastwiderständen von 220&nbsp;Ω bis 1&nbsp;kΩ.</li>
+          <li>GPR-Modelle mit <strong>scikit-learn</strong> trainiert, Hyperparameter per <strong>Bayes'scher Optimierung</strong> abgestimmt und vier Kernel verglichen. Der Matérn-Kernel lieferte das beste Ergebnis (R²&nbsp;0,991, MAE&nbsp;2,18 Prozentpunkte Tastverhältnis).</li>
+          <li>Drei Reglervarianten entwickelt: einfacher GPR-Regler, eine Variante mit maximalem Tastverhältnis während des anfänglichen Spannungseinbruchs und ein <strong>GPR-&nbsp;+&nbsp;PI-Regler</strong> mit Anti-Windup, der die verbleibende stationäre Regelabweichung beseitigt.</li>
+        </ul>
+
+        <h2>Ergebnisse</h2>
+        <figure class="figure">
+          <img class="contain" src="../../assets/img/thesis-results.png" alt="Lastspannung über der Zeit für das Wandler-IC und den GPR+PI-Regler bei Lastwechseln" loading="lazy">
+          <figcaption>Lastspannung von analogem IC und GPR+PI-Regler beim Zuschalten (≈1&nbsp;s) und Abschalten (≈2&nbsp;s) der RC-Last.</figcaption>
+        </figure>
+        <ul>
+          <li><strong>Genauigkeit:</strong> Beide Regler hielten die Lastspannung innerhalb von 1&nbsp;% des Sollwerts. Nach dem Zuschalten der RC-Last hatte der GPR+PI-Regler eine geringere stationäre Abweichung als das IC (4–17&nbsp;mV vs. 22–27&nbsp;mV MAE).</li>
+          <li><strong>Geschwindigkeit:</strong> Der GPR-Regler schwang in 108&nbsp;ms ein, das IC in 36&nbsp;ms. Ursache ist die Regelkreisperiode von 2,19&nbsp;ms (0,7&nbsp;ms Messen, 0,7&nbsp;ms Berechnen, 0,8&nbsp;ms PWM-Aktualisierung), überwiegend durch USB- und SDK-Overhead.</li>
+          <li>Die Analyse zeigt, dass ein etwa 3-mal schnellerer Regelkreis (≈0,73&nbsp;ms) mit dem IC mithalten sollte. Ohne diese Latenzen ist der Ansatz also konkurrenzfähig.</li>
+        </ul>
+
+        <h2>Ausblick</h2>
+        <p>Der naheliegende nächste Schritt ist, den Regler auf einem <strong>Mikrocontroller wie einem STM32</strong> auszuführen: Das GPR-Modell wird offline trainiert, auf das Gerät übertragen, und Messung sowie PWM-Erzeugung laufen direkt auf dem Chip, ohne USB-Latenz. Weitere Ideen sind, dem Modell einen Verlauf vergangener Messwerte zu geben, damit es das Einschwingverhalten lernt, sowie identische Schaltungstopologien für einen faireren Vergleich.</p>
+      </article>
+
+      <aside class="facts">
+        <dl>
+          <dt>Kontext</dt><dd>Bachelorarbeit, Hochschule Rhein-Waal, in Kooperation mit der RF-Frontend GmbH</dd>
+          <dt>Abgabe</dt><dd>Juni 2025</dd>
+          <dt>Meine Rolle</dt><dd>Alleiniger Autor: Schaltungs- und Platinenentwurf, Software, ML-Modell, Auswertung</dd>
+          <dt>Technik</dt><dd>Python, scikit-learn, scikit-optimize, WaveForms SDK, KiCad, Analog Discovery 2</dd>
+        </dl>
+        <a class="btn primary" href="https://github.com/monishsuresh/Thesis-Source-Code" rel="noopener">Code auf GitHub</a>
+        <a class="btn" href="https://drive.google.com/file/d/1gBkcHnLzC2Oy_JHDTUy7ZVJLLnsl0aaL/view?usp=sharing" rel="noopener" target="_blank">Bachelorarbeit lesen (PDF, Englisch)</a>
+      </aside>
+    </div>
+  </div>
+
+  <nav class="project-nav">
+    <div class="wrap">
+      <a href="shorter-projects.html">← Vorheriges Projekt<br><small>Antennensimulation &amp; Software-Tools</small></a>
+      <span></span>
+    </div>
+  </nav>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>© 2026 Monish Suresh</span>
+    <span><a href="../../impressum.html">Impressum</a> · <a href="../../datenschutz.html">Datenschutz</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

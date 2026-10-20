@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Monish Suresh – Embedded Firmware &amp; Hardware</title>
+  <meta name="description" content="Monish Suresh – M.Sc. student in Information Engineering and Computer Science. Embedded firmware (STM32, ESP32), PCB production and RF simulation. Based in Kamp-Lintfort, Germany.">
+  <meta name="color-scheme" content="light">
+  <link rel="alternate" hreflang="en" href="index.html">
+  <link rel="alternate" hreflang="de" href="de/index.html">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="#top">Monish Suresh</a>
+    <nav class="nav">
+      <a class="hide-sm" href="#projects">Projects</a>
+      <a class="hide-sm" href="#personal">Academic / Personal</a>
+      <a class="hide-sm" href="#experience">Experience</a>
+      <a class="hide-sm" href="#education">Education</a>
+      <a class="hide-sm" href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+      <a class="lang" href="de/index.html" hreflang="de" lang="de" title="Deutsche Version">DE</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <h1>Monish Suresh</h1>
+        <p class="role">Embedded firmware &amp; hardware: STM32, ESP32, PCB design and production</p>
+        <p class="meta">M.Sc. student, Information Engineering &amp; Computer Science · Kamp-Lintfort, Germany · German B2</p>
+        <div class="buttons">
+          <a class="btn primary" href="assets/CV_Monish_Suresh.pdf" download>Download CV (PDF)</a>
+          <a class="btn" href="mailto:monishsuresh2000@gmail.com">Email</a>
+          <a class="btn" href="https://www.linkedin.com/in/monish-suresh-187342227/" rel="noopener">LinkedIn</a>        </div>
+      </div>
+      <img class="photo" src="assets/img/photo.jpg" alt="Portrait of Monish Suresh" width="200" height="259">
+    </div>
+  </section>
+
+  <section class="about">
+    <div class="wrap">
+      <h2>About</h2>
+      <p>I'm an Information Engineering and Computer Science master's student at Hochschule Rhein-Waal. For the past three years I've worked hands-on at the boundary between software and hardware: writing STM32 firmware, building ESP32 IoT systems, and producing and testing PCBs, from pick-and-place to hand-soldering 0201 parts.</p>
+      <!-- TODO: adjust to the roles you are targeting and your availability -->
+      <p>I'm looking for a <strong>full time position</strong> in embedded systems, firmware or hardware development. I'm available at short notice: my notice period is <strong>one month to the end of the month</strong>. I speak English fluently and German at B2 level.</p>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="wrap">
+      <h2>Work projects</h2>
+      <div class="projects-grid">
+
+        <article class="card">
+          <div class="shot cover"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><rect x="18" y="18" width="28" height="28" rx="3"/><rect x="26" y="26" width="12" height="12" rx="1"/><path d="M24 10v8M32 10v8M40 10v8M24 46v8M32 46v8M40 46v8M10 24h8M10 32h8M10 40h8M46 24h8M46 32h8M46 40h8"/></svg><span>STM32 · Modbus</span></div>
+          <div class="body">
+            <h3>STM32 firmware: Modbus &amp; firmware updates</h3>
+            <p>Industrial firmware work at RF-Frontend (details kept general for confidentiality).</p>
+            <ul>
+              <li>Configured timers and interrupts to set GPIO pins to safe values when UART communication stops</li>
+              <li>Extended the Modbus command set of an STM32-based device</li>
+              <li>Added firmware update options and fixed bugs in existing code</li>
+            </ul>
+            <ul class="tags"><li>STM32</li><li>C</li><li>Modbus</li><li>STM32Cube</li></ul>
+            <p class="links"><a href="projects/stm32-firmware.html">Project details →</a></p>
+          </div>
+        </article>
+
+        <article class="card">
+          <img class="shot contain" src="assets/img/autotronik-pick-and-place.jpg" alt="Autotronik pick-and-place machine (image: Autotronik)" loading="lazy">
+          <div class="body">
+            <h3>PCB production &amp; testing</h3>
+            <p>Hands-on electronics manufacturing at RF-Frontend.</p>
+            <ul>
+              <li>Operated a pick-and-place machine; applied solder paste</li>
+              <li>Hand-soldered SMD components down to 0201 and connectors</li>
+              <li>Tested and tuned finished PCBs with an oscilloscope; inspected and repaired faulty boards</li>
+            </ul>
+            <ul class="tags"><li>SMD</li><li>Pick-and-place</li><li>Inspection</li><li>Testing</li></ul>
+            <p class="links"><a href="projects/pcb-production.html">Project details →</a></p>
+          </div>
+        </article>
+
+        <article class="card">
+          <img class="shot" src="assets/img/hydro-structure.jpg" alt="Hydroponic system with sensor boxes, pumps and valves" loading="lazy">
+          <div class="body">
+            <h3>ESP32 hydroponic farm controller</h3>
+            <p>FabLab Kamp-Lintfort: an IoT system that monitors and automates a desktop hydroponic farm.</p>
+            <ul>
+              <li>Automated water-quality cycle: pH and EC boxes, rinsing and sensor storage, 1–2× per day</li>
+              <li>15 MOSFET channels driving 10 pumps and 5 valves; RTC-scheduled ESP32 firmware</li>
+              <li>ThingsBoard dashboard with live readings and remote start</li>
+              <li>74HC4051 multiplexer PCB in KiCad; Fusion 360 and 3D-printed parts</li>
+            </ul>
+            <ul class="tags"><li>ESP32</li><li>C/C++</li><li>ThingsBoard</li><li>KiCad</li><li>Fusion 360</li></ul>
+            <!-- TODO: link to repo or write-up -->
+            <p class="links"><a href="projects/hydroponic.html">Project details →</a></p>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="shot cover"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M32 12v17M32 35v17"/><path d="M22 22a14 14 0 0 0 0 20M42 22a14 14 0 0 1 0 20"/><path d="M15 16a22 22 0 0 0 0 32M49 16a22 22 0 0 1 0 32"/></svg><span>MEEP · C# · Angular</span></div>
+          <div class="body">
+            <h3>Antenna simulation &amp; software tools</h3>
+            <p>Three shorter projects at RF-Frontend.</p>
+            <ul>
+              <li>Simulated a dipole antenna (S-parameters, far field) in Python with MEEP and compared the results with CST Studio reference results</li>
+              <li>Extended the C#/.NET voltage probe control application for a new probe variant and fixed bugs</li>
+              <li>Built Angular forms to add and edit storage locations and components in the company's inventory management system</li>
+            </ul>
+            <ul class="tags"><li>Python</li><li>MEEP</li><li>C#/.NET</li><li>Angular</li></ul>
+            <p class="links"><a href="projects/shorter-projects.html">Project details →</a></p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="personal">
+    <div class="wrap">
+      <h2>Academic / Personal projects</h2>
+      <div class="projects-grid">
+
+        <article class="card">
+          <img class="shot" src="assets/img/thesis-pcb.jpg" alt="Buck converter PCB from the bachelor thesis" loading="lazy">
+          <div class="body">
+            <h3>Bachelor thesis: buck converter control with machine learning</h3>
+            <p>A Gaussian Process Regression controller for a self-designed buck converter, benchmarked against a commercial analog IC.</p>
+            <ul>
+              <li>Designed the converter and its PCB in KiCad; solved PWM noise and a ground loop</li>
+              <li>Trained the GPR model with scikit-learn and Bayesian optimization (R² 0.991)</li>
+              <li>Held the voltage within 1&nbsp;% during load changes; identified latency as the path to IC-level speed</li>
+            </ul>
+            <ul class="tags"><li>Python</li><li>scikit-learn</li><li>GPR</li><li>KiCad</li><li>Power electronics</li></ul>
+            <p class="links"><a href="projects/bachelor-thesis.html">Project details →</a> · <a href="https://drive.google.com/file/d/1gBkcHnLzC2Oy_JHDTUy7ZVJLLnsl0aaL/view?usp=sharing" rel="noopener" target="_blank">Thesis (PDF)</a></p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="wrap">
+      <h2>Experience</h2>
+      <ol class="timeline">
+        <li>
+          <div class="when">Nov 2022 – now</div>
+          <div>
+            <h3>Student Worker</h3>
+            <p class="where">RF-Frontend · Kamp-Lintfort</p>
+            <ul>
+              <li>STM32 firmware: Modbus features, firmware updates, bug fixes</li>
+              <li>Antenna simulation with Python/MEEP, compared with CST reference results</li>
+              <li>Angular frontend for an inventory management system</li>
+              <li>C#/.NET voltage probe control application</li>
+              <li>PCB production, soldering, testing and tuning</li>
+            </ul>
+          </div>
+        </li>
+        <li>
+          <div class="when">May – Oct 2022</div>
+          <div>
+            <h3>Intern</h3>
+            <p class="where">FabLab Kamp-Lintfort</p>
+            <ul>
+              <li>ESP32 IoT firmware and closed-loop control for a hydroponic farm</li>
+              <li>ThingsBoard dashboard, Fusion 360 design, 3D printing, KiCad PCBs</li>
+            </ul>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="wrap">
+      <h2>Education</h2>
+      <ol class="timeline">
+        <li>
+          <div class="when">Oct 2025 – now</div>
+          <div>
+            <h3>M.Sc. Information Engineering and Computer Science</h3>
+            <p class="where">Hochschule Rhein-Waal</p>
+          </div>
+        </li>
+        <li>
+          <div class="when">2019 – 2025</div>
+          <div>
+            <h3>B.Sc. Communication and Information Engineering</h3>
+            <p class="where">Hochschule Rhein-Waal</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <h2>Skills</h2>
+      <div class="skills">
+        <div>
+          <h3>Programming</h3>
+          <ul class="tags"><li>C</li><li>Python</li><li>C#</li><li>Angular</li></ul>
+        </div>
+        <div>
+          <h3>Embedded</h3>
+          <ul class="tags"><li>STM32</li><li>STM32Cube</li><li>ESP32</li><li>Arduino</li><li>Modbus</li></ul>
+        </div>
+        <div>
+          <h3>Hardware</h3>
+          <ul class="tags"><li>KiCad</li><li>LTspice</li><li>SMD soldering</li><li>PCB testing</li></ul>
+        </div>
+        <div>
+          <h3>Tools</h3>
+          <ul class="tags"><li>Git</li><li>MATLAB</li><li>Simulink</li><li>MEEP</li><li>Fusion 360</li></ul>
+        </div>
+        <div>
+          <h3>Languages</h3>
+          <ul class="tags"><li>English (fluent)</li><li>German (B2)</li><li>Tamil</li><li>Hindi</li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <h2>Contact</h2>
+      <p>The quickest way to reach me is email. I'm happy to send references or more project details.</p>
+      <div class="buttons">
+        <a class="btn primary" href="mailto:monishsuresh2000@gmail.com">monishsuresh2000@gmail.com</a>
+        <a class="btn" href="https://www.linkedin.com/in/monish-suresh-187342227/" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>© 2026 Monish Suresh</span>
+    <span><a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

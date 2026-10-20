@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Antennensimulation &amp; Software-Tools – Monish Suresh</title>
+  <meta name="description" content="Drei kleinere Projekte bei RF-Frontend: eine Dipolantennen-Simulation in Python mit MEEP, abgeglichen mit Referenzergebnissen aus CST Studio, eine C#/.NET-Desktopanwendung zur Steuerung von Spannungstastköpfen und Angular-Formulare für ein Lagerverwaltungssystem.">
+  <meta name="color-scheme" content="light">
+  <link rel="alternate" hreflang="en" href="../../projects/shorter-projects.html">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">Monish Suresh</a>
+    <nav class="nav">
+      <a href="../index.html#projekte">Projekte</a>
+      <a href="../index.html#kontakt">Kontakt</a>
+      <a class="lang" href="../../projects/shorter-projects.html" hreflang="en" lang="en" title="English version">EN</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="project-hero blue">
+    <div class="wrap">
+      <a class="back" href="../index.html#projekte">← Zurück zu allen Projekten</a>
+      <h1>Antennensimulation &amp; Software-Tools</h1>
+      <p class="lead">Drei kleinere Projekte aus meiner Werkstudententätigkeit bei RF-Frontend: eine Antennensimulation mit dem Open-Source-Paket MEEP, eine C#/.NET-Desktopanwendung zur Steuerung von Spannungstastköpfen und Formulare für das Angular-Lagerverwaltungssystem des Unternehmens.</p>
+      <ul class="tags"><li>Python</li><li>MEEP</li><li>HF</li><li>C#/.NET</li><li>Angular</li></ul>
+    </div>
+  </section>
+
+  <div class="project-body">
+    <div class="wrap">
+      <article>
+        <p><em>Es handelt sich um Arbeit bei RF-Frontend; Details sind daher aus Vertraulichkeitsgründen allgemein gehalten.</em></p>
+        <h2>Dipolantennen-Simulation mit MEEP</h2>
+        <p>Kommerzielle Feldsimulatoren wie CST Studio sind leistungsfähig, aber teuer. In diesem Projekt wurde geprüft, ob das Open-Source-FDTD-Paket MEEP die CST-Ergebnisse für eine Referenzantenne, einen zylindrischen Dipol, reproduzieren kann.</p>
+        <ul>
+          <li>Modellierung einer zylindrischen Dipolantenne in MEEP mit Python</li>
+          <li>Berechnung der S-Parameter (Reflexionsverhalten über der Frequenz)</li>
+          <li>Berechnung des Fernfeld-Richtdiagramms</li>
+          <li>Vergleich meiner Ergebnisse mit Referenzergebnissen, die im Team mit CST Studio erstellt wurden, zur Validierung des MEEP-Workflows</li>
+        </ul>
+        <!-- MEEP is open source: a generic dipole simulation rerun at home (no company data) could provide S11 / far-field plots here later. -->
+        <!-- <p>[Wie gut MEEP mit CST übereinstimmte und was das für den Workflow bedeutet.]</p> -->
+
+        <h2>Tastkopf-Steuersoftware (C#/.NET)</h2>
+        <p>Eine C#/.NET-Desktopanwendung, mit der Spannungstastköpfe vom PC aus konfiguriert und gesteuert werden. Mein Beitrag:</p>
+        <ul>
+          <li>Erweiterung der Anwendung um eine neue Tastkopf-Variante</li>
+          <li>Fehleranalyse und -behebung in der bestehenden Anwendung</li>
+        </ul>
+
+        <h2>Lagerverwaltungssystem (Angular)</h2>
+        <p>Ein webbasiertes Lagerverwaltungssystem auf Basis von Angular, mit dem elektronische Bauteile und ihre Lagerorte verwaltet werden. Mein Beitrag zum System:</p>
+        <ul>
+          <li>Formulare zum Anlegen und Bearbeiten von Lagerorten, an denen Bauteile aufbewahrt werden</li>
+          <li>Formulare zum Anlegen und Bearbeiten von Bauteilen</li>
+        </ul>
+      </article>
+
+      <aside class="facts">
+        <dl>
+          <dt>Kontext</dt><dd>Werkstudent, RF-Frontend</dd>
+          <dt>Meine Rolle</dt><dd>Simulationsaufbau und Validierung; Desktop- und Webentwicklung</dd>
+          <dt>Technik</dt><dd>Python, MEEP, FDTD, C#/.NET, Angular</dd>
+        </dl>
+      </aside>
+    </div>
+  </div>
+
+  <nav class="project-nav">
+    <div class="wrap">
+      <a href="hydroponic.html">← Vorheriges Projekt<br><small>ESP32-Steuerung für eine Hydroponik-Farm</small></a>
+      <a href="bachelor-thesis.html" style="text-align:right">Nächstes Projekt →<br><small>Bachelorarbeit: Abwärtswandler-Regelung mit GPR</small></a>
+    </div>
+  </nav>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>© 2026 Monish Suresh</span>
+    <span><a href="../../impressum.html">Impressum</a> · <a href="../../datenschutz.html">Datenschutz</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
